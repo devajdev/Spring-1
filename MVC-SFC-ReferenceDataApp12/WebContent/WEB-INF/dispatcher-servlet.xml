@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Handler Mapping -->
+<bean  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+  <property name="mappings">
+     <props>
+        <prop key="register.htm">src</prop>
+     </props>
+  </property>
+</bean>
+
+<!-- Controller classes cfg -->
+<bean id="src"  class="com.nt.controller.StudentRegistrationController">
+    <property name="formView"  value="register"/>
+    <property name="successView" value="result"/>
+    <property name="commandName"  value="stCmd"/>
+    <property name="commandClass"  value="com.nt.command.StudentCommand"/>
+    <property name="validator">
+       <bean class="com.nt.validator.StudentCmdValidator"/>
+    </property>
+</bean>
+
+<!-- Cfg Properties file -->
+<bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+   <property name="basename" value="com/nt/commons/App"/>
+</bean>
+  
+  
+  <!-- view Resolver cfg -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       <property name="prefix" value="/WEB-INF/pages/"/>
+       <property name="suffix" value=".jsp"/>
+  </bean>
+  
+
+</beans>
